@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhatsApp Enquiry | Contact Us</title>
+  <style>
+    /* ===== Base ===== */
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f5f6fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* ===== Card ===== */
+    .form-container {
+      background: #fff;
+      padding: 40px 35px;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 440px;
+      transition: all 0.3s ease;
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .form-header h2 {
+      color: #0b8a3e;
+      font-size: 1.7rem;
+      margin-bottom: 6px;
+    }
+
+    .form-header p {
+      color: #6b7280;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* ===== Inputs ===== */
+    label {
+      font-weight: 600;
+      color: #333;
+      font-size: 0.95rem;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+      transition: 0.3s;
+      background-color: #fafafa;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #0b8a3e;
+      background-color: #fff;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(11,138,62,0.15);
+    }
+
+    textarea {
+      resize: none;
+      height: 110px;
+    }
+
+    /* ===== Button ===== */
+    button {
+      width: 100%;
+      background: linear-gradient(135deg, #0b8a3e, #087734);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(11,138,62,0.25);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 480px) {
+      .form-container {
+        padding: 25px 20px;
+        border-radius: 12px;
+      }
+
+      .form-header h2 {
+        font-size: 1.4rem;
+      }
+
+      input, textarea {
+        font-size: 0.9rem;
+      }
+
+      button {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <div class="form-header">
+      <h2>Send Enquiry on WhatsApp</h2>
+      <p>Fill the details below and connect with us instantly.</p>
+    </div>
+
+    <form onsubmit="return sendToWhatsApp()">
+      <label>Your Name *</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+
+      <label>Your Email (Optional)</label>
+      <input type="email" id="email" placeholder="Enter your email">
+
+      <label>Explain Message (Optional)</label>
+      <textarea id="message" placeholder="Write your message..."></textarea>
+
+      <button type="submit">Send to WhatsApp</button>
+    </form>
+  </div>
+
+  <script>
+    // 👇 Change this number to your own WhatsApp number (Example: 919529714547)
+    const WHATSAPP_NUMBER = "919529714547";
+
+    function sendToWhatsApp() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const msg = document.getElementById("message").value.trim();
+
+      let text = `*New Enquiry Received From Website*%0A`;
+      text += `*Name:* ${encodeURIComponent(name)}%0A`;
+      if (email) text += `*Email:* ${encodeURIComponent(email)}%0A`;
+      if (msg) text += `*Message:* ${encodeURIComponent(msg)}%0A`;
+
+      const link = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+      window.open(link, "_blank");
+      return false;
+    }
+  </script>
+
+</body>
+</html>
